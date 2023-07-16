@@ -1,9 +1,9 @@
 import Loading from "@/components/loadingComp";
 import { getMovieByID } from "@/services/movie-service";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "@/styles/index.module.css";
-import { Movie } from "@/types/Movie";
+import { MovieData } from "@/types/Movie";
 
 export default function MovieDetails() {
   const [movieDatabyID, setMovieDatabyID] = useState<MovieData>();
@@ -53,15 +53,4 @@ export default function MovieDetails() {
       )}
     </div>
   );
-}
-interface MovieData {
-  Title: string;
-  Year: string;
-  imdbID: string;
-  Type: string;
-  Poster: string;
-  Plot: string;
-  Runtime: string;
-  Writer: string;
-  imdbRating: string;
 }

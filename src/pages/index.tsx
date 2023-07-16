@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import { getMoviebyTitle } from "@/services/movie-service";
 import Loading from "@/components/loadingComp";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { Movie } from "@/types/Movie";
 import styles from "../styles/index.module.css";
@@ -15,11 +14,9 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Search() {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieData, setMovieData] = useState<Array<Movie>>([]);
-  const [imgURL, setImgURL] = useState("");
   const [loading, setLoading] = useState(false);
-  const { sm, md, lg } = useMediaQueries();
+  const { sm } = useMediaQueries();
 
-  const { push, query } = useRouter();
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
 

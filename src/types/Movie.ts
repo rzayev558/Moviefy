@@ -12,3 +12,15 @@ export interface Movie {
     Type: string,
     Poster: string
 }
+
+export interface MovieData {
+    Title: string;
+    Year: string;
+    imdbID: string;
+    Type: string;
+    Poster: string;
+    Plot: string;
+    Runtime: string;
+    Writer: string;
+    imdbRating: string;
+}
