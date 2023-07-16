@@ -43,7 +43,6 @@ export default function MovieDetails() {
       ) : (
         <>
           <h1 className={styles.movieTitle}>{movieDatabyID.Title}</h1>
-
           <div className={styles.moviePoster}>
             <img src={movieDatabyID.Poster} alt="Poster" />
           </div>
