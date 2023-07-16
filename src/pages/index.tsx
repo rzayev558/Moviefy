@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getMoviebyTitle } from "@/services/movie-service";
 import Loading from "@/components/loadingComp";
 import Link from "next/link";
@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import { Movie } from "@/types/Movie";
 import styles from "../styles/index.module.css";
 import { MovieSearchResult } from "@/types/Movie";
+import useMediaQueries from "@/hooks/useMediaQuery";
+import SearchIcon from "@/components/SearchIcon";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Search() {
@@ -15,9 +17,15 @@ export default function Search() {
   const [movieData, setMovieData] = useState<Array<Movie>>([]);
   const [imgURL, setImgURL] = useState("");
   const [loading, setLoading] = useState(false);
+  const { sm, md, lg } = useMediaQueries();
 
   const { push, query } = useRouter();
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMovieTitle(event.target.value);
@@ -60,7 +68,6 @@ export default function Search() {
         ></link>
       </Head>
       <div className={styles.inputContainer}>
-        {" "}
         <input
           className={styles.input}
           type="text"
@@ -69,7 +76,7 @@ export default function Search() {
           onChange={handleSubmit}
         />
         <button onClick={handleSearch} className={styles.button}>
-          Search
+          {sm && isClient ? <SearchIcon /> : "Search"}
         </button>
       </div>
 
