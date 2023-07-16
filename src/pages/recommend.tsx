@@ -17,7 +17,6 @@ export default function Recommend() {
       const randomIndex = Math.floor(Math.random() * randomTitles.length);
       const randomTitle = randomTitles[randomIndex];
       setSearchTitle(randomTitle);
-      console.log("Title 1", searchTitle);
 
       try {
         const recommendedMovies = await getMoviebyTitle(randomTitle);

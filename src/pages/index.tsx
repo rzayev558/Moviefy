@@ -13,8 +13,8 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Search() {
   const [movieTitle, setMovieTitle] = useState("");
   const [movieData, setMovieData] = useState<Array<Movie>>([]);
+  const [imgURL, setImgURL] = useState("");
   const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
 
   const { push, query } = useRouter();
   const router = useRouter();
@@ -37,9 +37,7 @@ export default function Search() {
       }
       setMovieData(searchedMovie.Search!);
       setLoading(false);
-      setSearched(true);
-
-      console.log(searchedMovie.Search);
+      return movieData;
     } catch (error) {
       console.log(error);
     }
@@ -80,32 +78,30 @@ export default function Search() {
       ) : (
         <main className={`${styles.main} ${inter.className}`}>
           <div className={styles.movieCards}>
-            {searched && movieData.length > 0 ? (
-              movieData.map((movie, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    router.push({
-                      pathname: "/movieDetails/[movieID]",
-                      query: { movieID: movie.imdbID },
-                    });
-                  }}
-                >
-                  <div className={styles.movieCard}>
-                    <div key={index} className={styles.movieTitleByQuery}>
-                      {movie.Title}
+            {movieData.length > 0
+              ? movieData.map((movie, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      router.push({
+                        pathname: "/movieDetails/[movieID]",
+                        query: { movieID: movie.imdbID },
+                      });
+                    }}
+                  >
+                    <div className={styles.movieCard}>
+                      <div key={index} className={styles.movieTitleByQuery}>
+                        {movie.Title}
+                      </div>
+                      <img
+                        src={movie.Poster}
+                        alt="img"
+                        className={styles.moviePosterbyQuery}
+                      />
                     </div>
-                    <img
-                      src={movie.Poster}
-                      alt="img"
-                      className={styles.moviePosterbyQuery}
-                    />
-                  </div>
-                </button>
-              ))
-            ) : searched && movieData.length === 0 ? (
-              <div>Movie was not found</div>
-            ) : null}
+                  </button>
+                ))
+              : null}
           </div>
         </main>
       )}
