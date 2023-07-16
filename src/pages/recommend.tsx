@@ -50,7 +50,7 @@ export default function Recommend() {
               key={index}
               onClick={() => {
                 router.push({
-                  pathname: "/movieDetails/[movieID]",
+                  pathname: "/[movieID]",
                   query: { movieID: movie.imdbID },
                 });
               }}
